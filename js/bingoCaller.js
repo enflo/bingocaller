@@ -219,12 +219,15 @@ var Bingo = function(bingoBoardElement, speechInstance) {
                 ballText = split[0] + "<br>" + split[1] + (split[2] ? split[2] : '');
 
             // if speech is enabled, call the numbers aloud
-            speechInstance.say(text);
-            for (var a = 0; a < split.length; a++) {
-                if (a == 0)
-                    continue
-                speechInstance.say(split[a].toLowerCase());
-            }
+            //speechInstance.say(text);
+            //for (var a = 0; a < split.length; a++) {
+                //if (a == 0)
+                //    continue
+                //speechInstance.say(split[a].toLowerCase());
+            //}
+
+            var audio = new Audio('Recordings/' + text + '.wav');
+            audio.play();
 
             // using the letter from the bingo call, determine the color of the ball
             var color = '';
@@ -243,6 +246,9 @@ var Bingo = function(bingoBoardElement, speechInstance) {
                     break;
                 case 'O':
                     color = 'orange';
+                    break;
+                case 'S':
+                    color = 'black';
                     break;
             }
 
