@@ -101,6 +101,9 @@ var Bingo = function(bingoBoardElement, speechInstance) {
         document.getElementById('resetGame').addEventListener('click', resetGameListener);
         document.getElementById('pauseGame').addEventListener('click', pauseGameListener);
         document.getElementById('resumeGame').addEventListener('click', resumeGameListener);
+        document.getElementById('linia').addEventListener('click', linia);
+        document.getElementById('bingo').addEventListener('click', bingo);
+        document.getElementById('bingobo').addEventListener('click', bingobo);
         document.getElementById('range').addEventListener('change', changeDelayListener);
         document.getElementById("nextBall").addEventListener('click', callBingoBall);
     }
@@ -113,6 +116,8 @@ var Bingo = function(bingoBoardElement, speechInstance) {
         this.classList.add('disabled');
         document.getElementById('pauseGame').classList.remove('disabled');
         document.getElementById('resetGame').classList.remove('disabled');
+        document.getElementById('linia').classList.remove('disabled');
+        document.getElementById('bingo').classList.remove('disabled');
 
         callBingoBall();
         ballCallingInterval = window.setInterval(callBingoBall, (parseInt(document.getElementById('range').value) * 1000));
@@ -125,7 +130,7 @@ var Bingo = function(bingoBoardElement, speechInstance) {
         clearInterval(ballCallingInterval);
         document.getElementById('resumeGame').classList.remove('disabled');
         document.getElementById('nextBall').classList.remove('disabled');
-        this.classList.add('disabled');
+        document.getElementById('pauseGame').classList.add('disabled');
     }
 
     /**
@@ -167,10 +172,36 @@ var Bingo = function(bingoBoardElement, speechInstance) {
         document.getElementById('pauseGame').classList.add('disabled');
         document.getElementById('resumeGame').classList.add('disabled');
         document.getElementById('nextBall').classList.add('disabled');
+        document.getElementById('bingo').classList.add('disabled');
+        document.getElementById('linia').classList.add('disabled');
+        document.getElementById('bingobo').classList.add('disabled');
         this.classList.add('disabled');
         // regenerate bingo board
         generateBingoBoard();
     }
+
+
+
+    function bingo() {
+        var audio = new Audio('Recordings/Bingo.wav');
+        this.classList.add('disabled');
+        document.getElementById('bingobo').classList.remove('disabled');
+        pauseGameListener();
+        audio.play();
+      }
+
+    function linia() {
+        var audio = new Audio('Recordings/Linia.wav');
+        this.classList.add('disabled');
+        pauseGameListener();
+        audio.play();
+      }
+
+    function bingobo() {
+        var audio = new Audio('Recordings/BingoBo.wav');
+        audio.play();
+        this.classList.add('disabled');
+      }
 
     /**
      * Event listener for delay slider
